@@ -1,0 +1,17 @@
+[package]
+name = "algonaut_uri"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algonaut_core = "0.4.2"
+serde = "1.0.188"
+
+
+[patch.crates-io]
+algonaut_core = { git = "https://github.com/manuelmauro/algonaut.git" }
+
+[dev-dependencies]
+insta = { version = "1.33.0", features = ["yaml"] }

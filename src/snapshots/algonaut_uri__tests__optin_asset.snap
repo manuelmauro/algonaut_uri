@@ -1,0 +1,9 @@
+---
+source: src/lib.rs
+expression: uri
+---
+address: ~
+params:
+  - Amount: 0
+  - Asset: 31566704
+
