@@ -14,10 +14,28 @@ impl AlgorandUrn {
     }
 }
 
-#[derive(Default)]
-pub struct AlgorandUrnBuilder {
-    address: Option<Address>,
-    params: Vec<Param>,
+impl fmt::Display for AlgorandUrn {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "algorand://")?;
+
+        if let Some(addr) = self.address {
+            write!(f, "{}", addr)?;
+        }
+
+        if self.params.len() > 0 {
+            write!(f, "?")?;
+        }
+
+        for p in &self.params[..&self.params.len() - 1] {
+            write!(f, "{}&", p)?;
+        }
+
+        if let Some(p) = &self.params.last() {
+            write!(f, "{}", p)?;
+        }
+
+        Ok(())
+    }
 }
 
 #[derive(Serialize)]
@@ -41,6 +59,12 @@ impl fmt::Display for Param {
             Param::Other(key, value) => write!(f, "{}={}", key, value),
         }
     }
+}
+
+#[derive(Default)]
+pub struct AlgorandUrnBuilder {
+    address: Option<Address>,
+    params: Vec<Param>,
 }
 
 impl AlgorandUrnBuilder {
@@ -79,30 +103,6 @@ impl AlgorandUrnBuilder {
             address: self.address,
             params: self.params,
         }
-    }
-}
-
-impl fmt::Display for AlgorandUrn {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "algorand://")?;
-
-        if let Some(addr) = self.address {
-            write!(f, "{}", addr)?;
-        }
-
-        if self.params.len() > 0 {
-            write!(f, "?")?;
-        }
-
-        for p in &self.params[..&self.params.len() - 1] {
-            write!(f, "{}&", p)?;
-        }
-
-        if let Some(p) = &self.params.last() {
-            write!(f, "{}", p)?;
-        }
-
-        Ok(())
     }
 }
 
