@@ -22,14 +22,14 @@ impl fmt::Display for AlgorandUrn {
 
         if !self.params.is_empty() {
             write!(f, "?")?;
-        }
 
-        for p in &self.params[..&self.params.len() - 1] {
-            write!(f, "{}&", p)?;
-        }
+            for p in &self.params[..&self.params.len() - 1] {
+                write!(f, "{}&", p)?;
+            }
 
-        if let Some(p) = &self.params.last() {
-            write!(f, "{}", p)?;
+            if let Some(p) = &self.params.last() {
+                write!(f, "{}", p)?;
+            }
         }
 
         Ok(())
