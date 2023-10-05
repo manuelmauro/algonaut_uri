@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 algonaut_core = "0.4.2"
-serde = "1.0.188"
 
 
 [patch.crates-io]

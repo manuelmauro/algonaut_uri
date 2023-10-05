@@ -1,8 +1,6 @@
 use algonaut_core::Address;
-use serde::Serialize;
 use std::fmt;
 
-#[derive(Serialize)]
 pub struct AlgorandUrn {
     address: Option<Address>,
     params: Vec<Param>,
@@ -22,7 +20,7 @@ impl fmt::Display for AlgorandUrn {
             write!(f, "{}", addr)?;
         }
 
-        if self.params.len() > 0 {
+        if !self.params.is_empty() {
             write!(f, "?")?;
         }
 
@@ -38,7 +36,6 @@ impl fmt::Display for AlgorandUrn {
     }
 }
 
-#[derive(Serialize)]
 pub enum Param {
     Amount(u64),
     Label(String),
@@ -120,7 +117,7 @@ mod tests {
             .address(Address::from_str(ALGO_ADDRESS).unwrap())
             .build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 
     #[test]
@@ -130,7 +127,7 @@ mod tests {
             .label("Silvio".to_string())
             .build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 
     #[test]
@@ -140,7 +137,7 @@ mod tests {
             .amount(150500000)
             .build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 
     #[test]
@@ -151,7 +148,7 @@ mod tests {
             .note("Lunch".to_string())
             .build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 
     #[test]
@@ -162,13 +159,13 @@ mod tests {
             .asset(31566704)
             .build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 
     #[test]
     fn optin_asset() {
         let uri = AlgorandUrn::builder().amount(0).asset(31566704).build();
 
-        insta::assert_yaml_snapshot!(uri);
+        insta::assert_yaml_snapshot!(uri.to_string());
     }
 }

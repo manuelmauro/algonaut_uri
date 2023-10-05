@@ -1,9 +1,6 @@
 ---
 source: src/lib.rs
-expression: uri
+expression: uri.to_string()
 ---
-address: ~
-params:
-  - Amount: 0
-  - Asset: 31566704
+"algorand://?amount=0&asset=31566704"
 
