@@ -13,6 +13,6 @@ algonaut_core = "0.4.2"
 algonaut_core = { git = "https://github.com/manuelmauro/algonaut.git" }
 
 [dev-dependencies]
-image = "0.23"
+image = "0.24"
 insta = { version = "1.33.0", features = ["yaml"] }
 qrcode = "0.12.0"
